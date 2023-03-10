@@ -6,8 +6,8 @@ use App\Cores\ApiResponse;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\SignupRequest;
 use App\Http\Resources\LoginResource;
+use App\Models\User;
 use Facades\App\Http\Repositories\UserRepository;
-use Facades\App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller

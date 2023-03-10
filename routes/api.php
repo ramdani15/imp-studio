@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +16,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Auth
-Route::group(['prefix' => 'auth', 'name' => 'auth'], function () {
+Route::group(['prefix' => 'auth', 'name' => 'auth.'], function () {
     Route::post('login', [AuthController::class, 'login'])->name('login');
     Route::post('signup', [AuthController::class, 'signup'])->name('signup');
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     });
+});
+
+// Users
+Route::group(['prefix' => 'user', 'name' => 'user.', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('userlist', [UserController::class, 'index'])->name('list');
 });

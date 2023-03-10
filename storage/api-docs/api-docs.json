@@ -171,6 +171,100 @@
                     }
                 ]
             }
+        },
+        "/user/userlist": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get list users ",
+                "description": "Endpoint to get list users ",
+                "operationId": "56b19269228f87f44edfbb632a8835e1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ID"
+                    },
+                    {
+                        "name": "fullname",
+                        "in": "query",
+                        "description": "fullname"
+                    },
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Username"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "1 for Ascending -1 for Descending"
+                    },
+                    {
+                        "name": "sort_by",
+                        "in": "query",
+                        "description": "Field to sort"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit (Default 10)"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Num Of Page"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get list users successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "example": []
+                                        },
+                                        "pagination": {
+                                            "type": "object",
+                                            "example": []
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Get list users failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Get list users failed"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "token": []
+                    }
+                ]
+            }
         }
     },
     "components": {
