@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 // Auth
 Route::group(['prefix' => 'auth', 'name' => 'auth'], function () {
     Route::post('login', [AuthController::class, 'login'])->name('login');
+    Route::post('signup', [AuthController::class, 'signup'])->name('signup');
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');

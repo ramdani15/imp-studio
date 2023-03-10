@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Cores\ApiResponse;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\SignupRequest;
 use App\Http\Resources\LoginResource;
-use App\Models\User;
+use Facades\App\Models\User;
+use Facades\App\Http\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -58,6 +60,58 @@ class AuthController extends Controller
         $data = new LoginResource($user);
 
         return $this->responseJson('success', 'Login success', $data);
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/auth/signup",
+     *      summary="Sign up",
+     *      description="Sign up by username, fullname and password",
+     *      tags={"Auth"},
+     *      @OA\RequestBody(
+     *          required=true,
+     *          description="Pass user credentials",
+     *          @OA\JsonContent(
+     *              required={"username", "fullname", "password"},
+     *              @OA\Property(property="username", type="string", example="username"),
+     *              @OA\Property(property="fullname", type="string", example="my name is ..."),
+     *              @OA\Property(property="password", type="string", format="password", example="password123"),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Register successfully",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="status", type="boolean", example=true),
+     *              @OA\Property(property="message", type="string", example="Register customer successfully"),
+     *              @OA\Property(property="data", type="object", example={}),
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Wrong credentials response",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message", type="string", example="The given data was invalid."),
+     *              @OA\Property(property="errors", type="object", example={}),
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Register failed",
+     *      ),
+     * )
+     */
+    public function signup(SignupRequest $request)
+    {
+        $data = $request->validated();
+        $data = UserRepository::register($data);
+
+        return $this->responseJson(
+            $data['status'] ? 'success' : 'error',
+            $data['message'],
+            $data['data'],
+            $data['status'] ? 201 : 500
+        );
     }
 
     /**
