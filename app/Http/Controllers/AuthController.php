@@ -6,8 +6,8 @@ use App\Cores\ApiResponse;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\SignupRequest;
 use App\Http\Resources\LoginResource;
-use Facades\App\Models\User;
 use Facades\App\Http\Repositories\UserRepository;
+use Facades\App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -68,33 +68,43 @@ class AuthController extends Controller
      *      summary="Sign up",
      *      description="Sign up by username, fullname and password",
      *      tags={"Auth"},
+     *
      *      @OA\RequestBody(
      *          required=true,
      *          description="Pass user credentials",
+     *
      *          @OA\JsonContent(
      *              required={"username", "fullname", "password"},
+     *
      *              @OA\Property(property="username", type="string", example="username"),
      *              @OA\Property(property="fullname", type="string", example="my name is ..."),
      *              @OA\Property(property="password", type="string", format="password", example="password123"),
      *          ),
      *      ),
+     *
      *      @OA\Response(
      *          response=201,
      *          description="Register successfully",
+     *
      *          @OA\JsonContent(
+     *
      *              @OA\Property(property="status", type="boolean", example=true),
      *              @OA\Property(property="message", type="string", example="Register customer successfully"),
      *              @OA\Property(property="data", type="object", example={}),
      *          )
      *      ),
+     *
      *      @OA\Response(
      *          response=422,
      *          description="Wrong credentials response",
+     *
      *          @OA\JsonContent(
+     *
      *              @OA\Property(property="message", type="string", example="The given data was invalid."),
      *              @OA\Property(property="errors", type="object", example={}),
      *          )
      *      ),
+     *
      *      @OA\Response(
      *          response=500,
      *          description="Register failed",
