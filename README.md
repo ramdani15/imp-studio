@@ -30,7 +30,7 @@ IMP Studio API.
 - Clone repo with `git clone https://github.com/ramdani15/imp-studio-api.git`
 - Copy `env.example` to `.env` and set it with your own credentials
 - For testing copy `env.example` to `.env.testing` and set it with your own credentials
-- On `.env` set `DB_HOST=db-imp` and `DB_PORT=3306`
+- On `.env` and `.env.testing` set `DB_HOST=db-imp` and `DB_PORT=3306`
 - Copy `/docker/env.example` to `/docker/.env` and set it with your own credentials
 - Run `docker compose up -d --build`
 - Run `docker compose exec app composer install`
